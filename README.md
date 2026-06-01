@@ -1,6 +1,5 @@
 # Carbon Stock Model — perbaikan kesiapan deploy
 
-Menyelesaikan tiga masalah blokir deployment dari notebook asli.
 
 | # | Masalah | Solusi | Lokasi |
 |---|---------|--------|--------|
@@ -26,6 +25,23 @@ sehingga selalu reprodusibel. Pembagian disimpan eksplisit sebagai artefak:
 Median imputasi dan metrik (MAE/RMSE/R²) dihitung **hanya dari fold yang benar**
 (median dari train, metrik dari test) untuk mencegah kebocoran. Rincian
 pembagian dicatat di `metadata.json` pada field `split`.
+
+## Data cleaning & EDA (ringkas)
+Pemeriksaan dataset (300 baris) menunjukkan **data sudah bersih**, sehingga
+cleaning tambahan tidak diperlukan:
+- **Missing value:** 0 pada seluruh band & target.
+- **Duplikat:** 0 baris.
+- **Target right-skewed** (skew ≈ 2.9; rentang 1.6–5987) → ditangani lewat
+  transform `log1p` saat latih dan `expm1` saat inference (lihat `train.py`).
+- **Indeks aman** (NDVI/NDWI/SAVI) dihitung dengan penjaga pembagian-nol di
+  `features.py`, dan band hilang diimputasi median training saat serving.
+
+Temuan EDA penting: **korelasi fitur–target sangat lemah** (maksimum |r| ≈ 0.20,
+itu pun dari `longitude`; semua band spektral < 0.18). Sebabnya `total_carbon_stock`
+didominasi **karbon tanah (~90%)** yang tidak terlihat oleh band optik/radar.
+Karena itu R² moderat **bukan** akibat data kotor, melainkan keterbatasan sinyal
+fitur — bisa dinaikkan dengan menambah fitur relevan (elevasi/pasang-surut,
+tekstur, komposit temporal) atau memodelkan komponen karbon secara terpisah.
 
 ## Model yang robust (dataset kecil ~300 baris)
 Untuk mengurangi overfitting dan memberi estimasi performa yang andal:
