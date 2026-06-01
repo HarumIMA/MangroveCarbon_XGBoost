@@ -1,11 +1,3 @@
-# Carbon Stock Model — perbaikan kesiapan deploy
-
-
-| # | Masalah | Solusi | Lokasi |
-|---|---------|--------|--------|
-| 1 | Model tidak pernah disimpan | Serialisasi ke bundle `model.json` + `metadata.json` (format native, portabel) | `train.py` |
-| 2 | Dua pipeline bertentangan (log vs mentah) | Dikunci ke satu pipeline: `log1p` saat latih, `expm1` saat inference; tercatat di metadata | `train.py`, `predict.py` |
-| 3 | Pembagian nol di NDVI/NDWI/SAVI | `_safe_ratio` + clip + imputasi median; tidak ada lagi inf/NaN | `features.py` |
 
 ## Struktur
 - `features.py` — feature engineering aman (sumber kebenaran tunggal training & serving)
