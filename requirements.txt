@@ -1,0 +1,17 @@
+# Versi di-pin agar format model.json kompatibel & hasil reproducible.
+# Optuna TIDAK disertakan: itu hanya untuk tuning, tidak diperlukan saat serving.
+
+# --- Inti model (training & inference) ---
+xgboost==3.2.0
+scikit-learn==1.8.0
+pandas==3.0.2
+numpy==2.4.4
+
+# --- Serving REST API (app.py / Dockerfile) ---
+fastapi==0.136.3
+uvicorn[standard]==0.48.0
+pydantic==2.13.4
+
+# Catatan: butuh streamlit >= 1.49 agar kompatibel dengan pandas 3.x
+# (streamlit 1.45.1 mensyaratkan pandas<3 -> bentrok dengan pin pandas di atas).
+streamlit==1.58.0

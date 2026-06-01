@@ -1,0 +1,123 @@
+{
+  "model_type": "XGBRegressor",
+  "model_files": {
+    "native": "model.json",
+    "pickle": "model.pkl"
+  },
+  "target": "total_carbon_stock",
+  "target_transform": "log1p",
+  "feature_order": [
+    "longitude",
+    "latitude",
+    "B2",
+    "B3",
+    "B4",
+    "B5",
+    "B6",
+    "B7",
+    "B8",
+    "B8A",
+    "B11",
+    "B12",
+    "VV",
+    "VH",
+    "NDVI",
+    "NDWI",
+    "SAVI"
+  ],
+  "raw_bands": [
+    "longitude",
+    "latitude",
+    "B2",
+    "B3",
+    "B4",
+    "B5",
+    "B6",
+    "B7",
+    "B8",
+    "B8A",
+    "B11",
+    "B12",
+    "VV",
+    "VH"
+  ],
+  "savi_L": 0.5,
+  "feature_medians": {
+    "longitude": -6.052891909308222,
+    "latitude": 4.968244585240098,
+    "B2": 0.03593470319568855,
+    "B3": 0.05430074562751435,
+    "B4": 0.0418684022454009,
+    "B5": 0.09624198561345634,
+    "B6": 0.21137374406816134,
+    "B7": 0.2422397331053852,
+    "B8": 0.2397764531843292,
+    "B8A": 0.2645808729525513,
+    "B11": 0.1249918481703742,
+    "B12": 0.06229014133146015,
+    "VV": -7.654774015636113,
+    "VH": -14.511280128107849,
+    "NDVI": 0.6781681248960496,
+    "NDWI": -0.5999092101576156,
+    "SAVI": 0.36527347126675325
+  },
+  "model_params": {
+    "n_estimators": 223,
+    "learning_rate": 0.02,
+    "max_depth": 4,
+    "min_child_weight": 5.0,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "reg_alpha": 0.5,
+    "reg_lambda": 2.0,
+    "gamma": 0.1,
+    "random_state": 42
+  },
+  "cv": {
+    "n_folds": 5,
+    "mae_mean": 281.58881258262,
+    "mae_std": 101.02856374733094,
+    "rmse_mean": 583.4465416213554,
+    "rmse_std": 259.7451574869802,
+    "r2_mean": 0.36106596252763357,
+    "r2_std": 0.14826400953157218,
+    "best_iterations": [
+      232,
+      156,
+      192,
+      271,
+      265
+    ],
+    "chosen_n_estimators": 223
+  },
+  "split": {
+    "method": "random_holdout",
+    "test_size": 0.2,
+    "random_state": 42,
+    "n_train": 240,
+    "n_test": 60,
+    "train_file": "train.csv",
+    "test_file": "test.csv"
+  },
+  "metrics": {
+    "mae": 343.9100728228251,
+    "rmse": 757.5960206675757,
+    "r2": 0.38280086248680134,
+    "n_train": 240,
+    "n_test": 60
+  },
+  "library_versions": {
+    "xgboost": "3.2.0",
+    "scikit_learn": "1.8.0",
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "python": "3.13.7"
+  },
+  "dataset": {
+    "filename": "civ_mangrove_biomass_dataset.csv",
+    "sha256": "ec7b69cb5a359526542b849d985f4f0572213eb238c6d9547c7db72983d7a902",
+    "n_rows": 300
+  },
+  "trained_at_utc": "2026-06-01T07:07:14.116790+00:00",
+  "schema_version": 1
+}
